@@ -4,12 +4,13 @@
   "description": "A terminal app to view the latest IDX stock prices.",
   "main": "index.js",
   "bin": {
-    "idx": "./index.js"
+    "idx": "index.js"
   },
   "dependencies": {
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
     "columnify": "^1.5.4",
+    "idx": "^2.5.6",
     "node-fetch": "^2.6.0",
     "yargs": "^15.4.1"
   },
@@ -27,5 +28,9 @@
   "bugs": {
     "url": "https://github.com/dwedaz/idxticker/issues"
   },
-  "homepage": "https://github.com/dwedaz/idxticker#readme"
+  "homepage": "https://github.com/dwedaz/idxticker#readme",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
