@@ -1,29 +1,25 @@
-# ASX Ticker
+# IDX Ticker
 
-A terminal app to view the latest ASX stock prices.
+fork from ASX Ticker 
+A terminal app to view the latest IDX (Indonesia stock exchange) stock prices.
 
 ## Demo
 
-![Alt text](demo.gif?raw=true "Demo")
+![Alt text](demo.png?raw=true "Demo")
 
 ## Installation
 
-Simply run `npm i -g asxticker` to install asxticker globally.
+Simply run `npm i -g idxticker` to install asxticker globally.
 
 Once installed you can run the following commands:
 
 ```bash
 # show top 20 asx stocks
-asx
+idx
 
 # query single asx stock
-asx -c CBA
+idx -c BBCA
 
 # query multiple asx stocks
-asx -c CBA,REA,APT
+idx -c BBCA,ASII,TLKM
 ```
-
-## TODO
-
-* [ ] Clean up code and add some unit tests
-

@@ -2,7 +2,6 @@
 'use strict';
 
 const fetch = require('node-fetch');
-const cheerio = require('cheerio');
 const chalk = require('chalk');
 const yargs = require('yargs');
 const columnify = require('columnify');
@@ -10,9 +9,9 @@ const columnify = require('columnify');
 const divider = '--------------------------------------------------------------------------------------------------------------';
 
 const options = yargs
-.default('c', 'AMC,ANZ,BHP,BXB,CBA,CSL,GMG,IAG,MQG,NAB,NCM,RIO,SCG,SUN,TLS,TCL,WES,WBC,WPL,WOW', 'Show top 20 ASX codes')
+.default('c', 'ASII, BBCA, TLKM, INDF, UNVR' , 'Show top 20 IDX codes')
 .usage('Usage: -c <code>')
-.option('c', { alias: 'code', describe: 'ASX code (eg: BEN or multiple codes BEN,CBA,ATP)', type: 'string', demandOption: false })
+.option('c', { alias: 'code', describe: 'IDX code (eg: BEN or multiple codes BEN,CBA,ATP)', type: 'string', demandOption: false })
 .argv;
 
 let code = `${options.code}`.split(',');
@@ -27,41 +26,38 @@ let results = [];
 
 console.clear();
 
-function getData(asxCodes) {
+function getData(idxCodes) {
   return new Promise((resolve, reject) => {
-    const response = fetch(`https://www.asx.com.au/asx/markets/equityPrices.do?by=asxCodes&asxCodes=${asxCodes}`)
+ 
+    idxCodes = idxCodes.trim();
+    const response = fetch(`https://www.idx.co.id/umbraco/Surface/Home/GetStockInfo?code=${idxCodes}`)
     .then(response => response.text())
     .then(body => {
-      const $ = cheerio.load(body);
-      // regex - https://stackoverflow.com/a/33823632
-      $('.datatable tr').each((index, element) => {
-        const row = $(element).text().trim().replace('*', '').replace(/\s+/g, '| ');
-        const column = row.split('| ');
-        const change = column[2].charAt(0);
-        if (index !== 0) {
-          results.push({
-            code: chalk.bgHex('#333').hex('#fff').bold(column[0]),
-            last: chalk.hex('#fff')(column[1]),
-            '$+/-': (change === '-' && index !== 0) ? chalk.hex('#e88388').bold(column[2]) : chalk.hex('#a8cc8b').bold(column[2]),
-            '% chg': (change === '-' && index !== 0) ? chalk.hex('#e88388').bold(column[3]) : chalk.hex('#a8cc8b').bold(column[3]),
-            bid: chalk.hex('#fff')(column[4]),
-            offer: chalk.hex('#fff')(column[5]),
-            open: chalk.hex('#fff')(column[6]),
-            high: chalk.hex('#fff')(column[7]),
-            low: chalk.hex('#fff')(column[8]),
-            volume: chalk.hex('#fff')(column[9])
-          });
-        }
+   
+      var data = JSON.parse(body);
+      var change = data['Change'] >= 0 ? false: true ;
+     
+      results.push({
+            code: chalk.bgHex('#333').hex('#fff').bold(idxCodes),
+            price: chalk.hex('#fff')(data['Price']),
+            '$+/-': change  ? chalk.hex('#e88388').bold(data['Change']) : chalk.hex('#a8cc8b').bold(data['Change']),
+            '% chg': change  ? chalk.hex('#e88388').bold(data['Percent']) : chalk.hex('#a8cc8b').bold(data['Percent']),            
+            value: chalk.hex('#fff')(data['Value']),
+            frequency: chalk.hex('#fff')(data['Frequency']),
+            volume: chalk.hex('#fff')(data['Volume'])
       });
+  
       resolve(results);
     })
   })
 }
 
+
+
 const getAllData = async () => {
-  return Promise.all(codes.map(codes => {
-    const asxCodes = codes.toString().replace(/,/g, '+');
-    return getData(asxCodes)
+  return Promise.all(codes[0].map(codes => {
+    const idxCodes = codes.toString().replace(/,/g, '+');
+    return getData(idxCodes)
   }))
 }
 
@@ -72,17 +68,14 @@ getAllData().then((val) => {
       code: { minWidth: 10 },
       last: { minWidth: 10 },
       '$+/-': { minWidth: 10 },
-      '% chg': { minWidth: 10 },
-      bid: { minWidth: 10 },
-      offer: { minWidth: 10 },
-      open: { minWidth: 10 },
-      high: { minWidth: 10 },
-      low: { minWidth: 10 },
-      volume: { minWidth: 10 },
+      '% chg': { minWidth: 10 },    
+      value: { minWidth: 10 },
+      frequency: { minWidth: 10 },
+      volume: { minWidth: 10 }      
     }
   }
   const columns = columnify(results, tableOptions);
-  console.log(chalk.hex('#fff').bold(`\n$$$ ASX Ticker $$$`));
+  console.log(chalk.hex('#fff').bold(`\n$$$ IDX Ticker $$$`));
   console.log(divider);
   if (results.length) {
     console.log(columns);
