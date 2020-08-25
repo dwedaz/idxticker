@@ -1,30 +1,31 @@
 {
-  "name": "asxticker",
+  "name": "idxticker",
   "version": "1.2.3",
-  "description": "A terminal app to view the latest ASX stock prices.",
+  "description": "A terminal app to view the latest IDX stock prices.",
   "main": "index.js",
   "bin": {
-    "asx": "./index.js"
+    "idx": "./index.js"
   },
   "dependencies": {
     "chalk": "^4.1.0",
+    "cheerio": "^1.0.0-rc.3",
     "columnify": "^1.5.4",
     "node-fetch": "^2.6.0",
     "yargs": "^15.4.1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matthewhartman/asxticker.git"
+    "url": "git+https://github.com/dwedaz/idxticker.git"
   },
-  "author": "Matthew Hartman <matthewhartmanau@gmail.com>",
+  "author": "Willy yudithya <neo.dwedaz@gmail.com>",
   "license": "MIT",
   "keywords": [
-    "asx",
+    "idx",
     "stock ticker",
     "sharemarket"
   ],
   "bugs": {
-    "url": "https://github.com/matthewhartman/asxticker/issues"
+    "url": "https://github.com/dwedaz/idxticker/issues"
   },
-  "homepage": "https://github.com/matthewhartman/asxticker#readme"
+  "homepage": "https://github.com/dwedaz/idxticker#readme"
 }
