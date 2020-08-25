@@ -9,17 +9,17 @@ A terminal app to view the latest IDX (Indonesia stock exchange) stock prices.
 
 ## Installation
 
-Simply run `npm i -g idxticker` to install asxticker globally.
+Simply run `npm i -g idxticker` to install idxticker globally.
 
 Once installed you can run the following commands:
 
 ```bash
-# show top 20 asx stocks
+# show top 20 idx stocks
 idx
 
-# query single asx stock
+# query single idx stock
 idx -c BBCA
 
-# query multiple asx stocks
+# query multiple idx stocks
 idx -c BBCA,ASII,TLKM
 ```
