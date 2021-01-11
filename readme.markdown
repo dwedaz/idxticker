@@ -26,7 +26,14 @@ idx -c BBCA,ASII,TLKM
 
 ## Cron
 ```
-* /5 * * * * /path/to/stock_alert.sh BBRI 5000
+*/5 * * * * /path/to/stock_alert.sh "<" BBRI 5000
 ```
+```
+*/5 * * * * /path/to/stock_alert.sh ">" BBRI 3000
+```
+```
+*/5 * * * * /path/to/stock_alert.sh "=" BBRI 3000
+```
+
 
  
