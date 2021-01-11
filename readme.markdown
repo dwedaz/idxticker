@@ -23,3 +23,10 @@ idx -c BBCA
 # query multiple idx stocks
 idx -c BBCA,ASII,TLKM
 ```
+
+## Cron
+```
+* /5 * * * * /path/to/stock_alert.sh BBRI 5000
+```
+
+ 

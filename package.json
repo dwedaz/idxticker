@@ -1,6 +1,6 @@
 {
-  "name": "idxticker",
-  "version": "1.2.4",
+  "name": "@dwedaz/idxticker",
+  "version": "1.2.5",
   "description": "A terminal app to view the latest IDX stock prices.",
   "main": "index.js",
   "bin": {
