@@ -72,7 +72,7 @@ const getAllData = async () => {
   return Promise.all(codes[0].map(codes => {
     const idxCodes = codes.toString().replace(/,/g, '+');
     
-    if (typeof format == 'undefined'){
+    if (format == "undefined"){
       return getData(idxCodes, false);
     }else{
       return getData(idxCodes, true);
@@ -94,7 +94,7 @@ getAllData().then((val) => {
     }
   }
   const columns = columnify(results, tableOptions);
-  if (typeof format == 'undefined'){
+  if (format == "undefined"){
     if (results.length) {
       console.log(chalk.hex('#fff').bold(`\n$$$ IDX Ticker $$$`));
       console.log(columns);
@@ -105,7 +105,7 @@ getAllData().then((val) => {
     if (results.length){
       if(format == 'price'){
         results.forEach(function(result, index){
-          if (typeof result.price  != 'undefined'){
+          if (result.price  != 'undefined'){
             console.log(result.price);
           }
         });
